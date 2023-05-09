@@ -1,4 +1,4 @@
-package com.example.myweatherapp.fragments
+package com.example.myweatherapp.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,24 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.myweatherapp.R
-import com.example.myweatherapp.core.RetroResponse
+import com.example.myweatherapp.data.RetroResponse
 import com.example.myweatherapp.databinding.FragmentOneBinding
-import com.example.myweatherapp.viewModels.FragmentOneViewModel
-import com.example.myweatherapp.weather.WeatherResponse
-import com.google.android.material.button.MaterialButton
+import com.example.myweatherapp.viewModels.FragmentCommonViewModel
+import com.example.myweatherapp.data.models.WeatherResponse
 
 class Fragment1 : Fragment() {
     private lateinit var binding: FragmentOneBinding
-    private val model: FragmentOneViewModel by viewModels()
+    private val model: FragmentCommonViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +39,11 @@ class Fragment1 : Fragment() {
         }
 
         binding.buttonNavFragmentOne.setOnClickListener{
-            Navigation.findNavController(binding.root).navigate(R.id.action_fragment1_to_fragment2)
+            val cityName = binding.txtCityName.text.toString()
+            val bundle = Bundle().apply {
+                putString("cityName", cityName)
+            }
+            findNavController().navigate(R.id.action_fragment1_to_fragment2, bundle)
         }
 
         observers()
@@ -81,10 +78,10 @@ class Fragment1 : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun bindData(value: WeatherResponse) {
         binding.txtCity.text =
-            ( binding.txtCityName.text.toString() + ", " + (value.sys?.country ?: "N/A"))
-        binding.txtTemp.text = value.main?.temp?.let {
-            it.toString() + "kelvin"
-        } ?: "N/A"
+            (binding.txtCityName.text.toString() + ", " + (value.sys?.country ?: "N/A"))
+        val kelvinTemp = value.main?.temp ?: Double.NaN
+        val celsiusTemp = kelvinTemp - 273.15
+        binding.txtTemp.text = if (kelvinTemp.isNaN()) "N/A" else "${celsiusTemp.toInt()}℃"
         binding.txtClouds.text = value.clouds?.all?.toString() ?: "N/A"
         binding.txtPressure.text = value.main?.pressure?.toString() ?: "N/A"
     }

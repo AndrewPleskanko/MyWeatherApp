@@ -1,21 +1,16 @@
-package com.example.myweatherapp
+package com.example.myweatherapp.ui
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.myweatherapp.databinding.ActivityMainBinding
-
+import com.example.myweatherapp.R
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

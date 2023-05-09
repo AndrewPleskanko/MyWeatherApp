@@ -1,51 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.Fragment1"
-    android:gravity="center">
+    tools:context=".ui.fragments.Fragment1">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="189dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="50dp"
-        android:text="Weather Information"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtCityName"
-        android:layout_width="311dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/white"
-        android:ems="10"
-        android:hint="City Name"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/lightGrey"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCityName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtCityName" />
+        <EditText
+            android:id="@+id/txtCityName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="Enter city name"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/lightGrey"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            app:layout_constraintBottom_toBottomOf="@+id/txtCityName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtCityName"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp" />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -80,21 +71,24 @@
         android:layout_marginTop="30dp"
         android:padding="12dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtTemp"
+            android:layout_width="68dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="N/A"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Temperature: "
-                android:textSize="14sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N/A"
-                android:textSize="14sp"
-                android:id="@+id/txtTemp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -153,17 +147,13 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello, world1!" />
-
     <Button
         android:id="@+id/buttonNavFragmentOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:text="@string/details"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
 </LinearLayout>

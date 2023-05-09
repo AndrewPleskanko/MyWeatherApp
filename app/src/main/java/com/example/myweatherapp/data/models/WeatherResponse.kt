@@ -1,14 +1,12 @@
-package com.example.myweatherapp.weather
+package com.example.myweatherapp.data.models
 
-import com.example.myweatherapp.weather.Clouds
-import com.example.myweatherapp.weather.Main
-import com.example.myweatherapp.weather.Sys
-
-data class WeatherResponse (
+data class WeatherResponse(
 
     var base: String? = null,
 
     var main: Main? = null,
+
+    val weather: List<Weather>? = null,
 
     var clouds: Clouds? = null,
 

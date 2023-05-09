@@ -7,20 +7,26 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.myweatherapp.fragments.Fragment1"
+        android:name="com.example.myweatherapp.ui.fragments.Fragment1"
         android:label="fragment_1"
-        tools:layout="@layout/fragment_one" >
+        tools:layout="@layout/fragment_one">
+
         <action
             android:id="@+id/action_fragment1_to_fragment2"
-            app:destination="@id/fragment2" />
+            app:destination="@id/fragment2"/>
     </fragment>
+
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.myweatherapp.fragments.Fragment2"
+        android:name="com.example.myweatherapp.ui.fragments.Fragment2"
         android:label="fragment_2"
-        tools:layout="@layout/fragment_two" >
+        tools:layout="@layout/fragment_two">
+
         <action
             android:id="@+id/action_fragment2_to_fragment1"
             app:destination="@id/fragment1" />
     </fragment>
+    <argument
+        android:name="cityName"
+        app:argType="string" />
 </navigation>

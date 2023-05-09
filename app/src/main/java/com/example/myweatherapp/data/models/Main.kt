@@ -1,15 +1,17 @@
-package com.example.myweatherapp.weather
+package com.example.myweatherapp.data.models
 
-data class Main (
+data class Main(
     var temp: Double? = null,
 
     var pressure: Double? = null,
 
+    var feels_like: Double? = null,
+
     var humidity: Int? = null,
 
-    var tempMin: Double? = null,
+    var temp_min: Double? = null,
 
-    var tempMax: Double? = null,
+    var temp_max: Double? = null,
 
     var seaLevel: Double? = null,
 

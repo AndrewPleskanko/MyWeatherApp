@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myweatherapp.core.RetroResponse
-import com.example.myweatherapp.core.services.RetroService
-import com.example.myweatherapp.weather.WeatherResponse
+import com.example.myweatherapp.data.RetroResponse
+import com.example.myweatherapp.data.services.RetroService
+import com.example.myweatherapp.data.models.WeatherResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FragmentOneViewModel : ViewModel() {
+class FragmentCommonViewModel : ViewModel() {
 
     val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
