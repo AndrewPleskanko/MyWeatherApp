@@ -11,7 +11,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 object RetroService {
 
-    val retrofitService: APIs by lazy {
-        retrofit.create(APIs::class.java)
+    val retrofitService: RetrofitService by lazy {
+        retrofit.create(RetrofitService::class.java)
     }
 }

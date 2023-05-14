@@ -1,4 +1,4 @@
-package com.example.myweatherapp.ui.fragments
+package com.example.myweatherapp.presentation.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,17 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
-import com.example.myweatherapp.data.RetroResponse
+import com.example.myweatherapp.data.image.ImageLoader
+import com.example.myweatherapp.data.network.RetroResponse
 import com.example.myweatherapp.databinding.FragmentTwoBinding
-import com.example.myweatherapp.viewModels.FragmentCommonViewModel
-import com.example.myweatherapp.data.models.WeatherResponse
-import java.text.SimpleDateFormat
+import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModel
+import com.example.myweatherapp.domain.models.WeatherResponse
+import com.example.myweatherapp.data.services.RetroService
+import com.example.myweatherapp.domain.WeatherUseCase
+import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModelFactory
+import com.example.myweatherapp.domain.repository.WeatherRepository
 import java.util.*
 
 class Fragment2 : Fragment() {
     private lateinit var binding: FragmentTwoBinding
-    private val model: FragmentCommonViewModel by viewModels()
+    private val weatherRepository: WeatherRepository = WeatherRepository(RetroService.retrofitService)
+    private val weatherUseCase: WeatherUseCase = WeatherUseCase(weatherRepository)
+    private val model: FragmentCommonViewModel by viewModels { FragmentCommonViewModelFactory(weatherUseCase) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,51 +69,34 @@ class Fragment2 : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun bindData(value: WeatherResponse) {
-        binding.txtTemp.text = formatTemperature(value.main?.temp)
-        binding.txtMaxTemp.text = formatTemperature(value.main?.temp_max)
-        binding.txtMinTemp.text = formatTemperature(value.main?.temp_min)
-        binding.txtFeelsLike.text = formatTemperature(value.main?.feels_like)
+        binding.txtTemp.text = model.formatTemperature(value.main?.temp)
+        binding.txtMaxTemp.text = model.formatTemperature(value.main?.temp_max)
+        binding.txtMinTemp.text = model.formatTemperature(value.main?.temp_min)
+        binding.txtFeelsLike.text = model.formatTemperature(value.main?.feels_like)
 
         binding.txtClouds.text = value.clouds?.all?.toString() ?: "N/A"
         binding.txtPressure.text = value.main?.pressure?.toString() ?: "N/A"
         binding.txtHumidity.text = value.main?.humidity?.toString() ?: "N/A"
 
         val sunriseTimestamp = value.sys?.sunrise ?: 0L
-        binding.txtSunrise.text = convertTimestampToHour(sunriseTimestamp)
+        binding.txtSunrise.text = model.convertTimestampToHour(sunriseTimestamp)
 
         val sunsetTimestamp = value.sys?.sunset ?: 0L
-        binding.txtSunset.text = convertTimestampToHour(sunsetTimestamp)
-
+        binding.txtSunset.text = model.convertTimestampToHour(sunsetTimestamp)
 
         val weather = value.weather?.get(0)
 
-// Check if the weather object is not null
+
         if (weather != null) {
             val iconCode = weather.icon
 
-            // Set the icon code to the ImageView tag
-            binding.weatherIconImageView.tag = iconCode
+            // У вашому фрагменті
+            val imageLoader = ImageLoader(requireContext())
 
-            // Construct the icon URL using the icon code
+// Завантаження зображення
             val iconUrl = "https://openweathermap.org/img/wn/$iconCode@2x.png"
+            imageLoader.loadImage(iconUrl, binding.weatherIconImageView)
 
-            // Load the image using Glide and display it in the ImageView
-            Glide.with(requireContext())
-                .load(iconUrl)
-                .into(binding.weatherIconImageView)
         }
-    }
-
-    private fun formatTemperature(temperature: Double?): String {
-        return temperature?.let {
-            val celsiusTemp = it - 273.15
-            "${celsiusTemp.toInt()}℃"
-        } ?: "N/A"
-    }
-
-    private fun convertTimestampToHour(timestamp: Long): String {
-        val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val date = Date(timestamp * 1000)
-        return dateFormat.format(date)
     }
 }

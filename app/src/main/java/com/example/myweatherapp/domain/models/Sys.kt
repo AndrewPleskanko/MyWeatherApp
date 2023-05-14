@@ -1,4 +1,4 @@
-package com.example.myweatherapp.data.models
+package com.example.myweatherapp.domain.models
 
 data class Sys (
     var message: Double? = null,

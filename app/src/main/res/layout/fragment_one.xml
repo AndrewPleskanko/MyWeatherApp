@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.Fragment1">
+    tools:context=".presentation.ui.fragments.Fragment1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,8 +74,8 @@
 
         <TextView
             android:id="@+id/txtTemp"
-            android:layout_width="68dp"
-            android:layout_height="69dp"
+            android:layout_width="98dp"
+            android:layout_height="79dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
