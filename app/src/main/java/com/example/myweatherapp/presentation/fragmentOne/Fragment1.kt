@@ -1,4 +1,4 @@
-package com.example.myweatherapp.presentation.ui.fragments
+package com.example.myweatherapp.presentation.fragmentOne
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,14 +11,14 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myweatherapp.R
-import com.example.myweatherapp.data.network.RetroResponse
+import com.example.myweatherapp.data.models.RetroResponse
 import com.example.myweatherapp.databinding.FragmentOneBinding
 import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModel
 import com.example.myweatherapp.domain.models.WeatherResponse
-import com.example.myweatherapp.data.services.RetroService.retrofitService
+import com.example.myweatherapp.data.network.RetroService.retrofitService
 import com.example.myweatherapp.domain.WeatherUseCase
 import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModelFactory
-import com.example.myweatherapp.domain.repository.WeatherRepository
+import com.example.myweatherapp.data.repository.WeatherRepository
 
 class Fragment1 : Fragment() {
     private lateinit var binding: FragmentOneBinding

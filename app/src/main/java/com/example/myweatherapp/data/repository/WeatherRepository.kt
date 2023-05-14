@@ -1,7 +1,7 @@
-package com.example.myweatherapp.domain.repository
+package com.example.myweatherapp.data.repository
 
 import com.example.myweatherapp.domain.models.WeatherResponse
-import com.example.myweatherapp.data.services.RetrofitService
+import com.example.myweatherapp.data.network.RetrofitService
 
 
 class WeatherRepository(private val retrofitService: RetrofitService) {

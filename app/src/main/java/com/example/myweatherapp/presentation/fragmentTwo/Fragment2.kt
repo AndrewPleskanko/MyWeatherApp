@@ -1,4 +1,4 @@
-package com.example.myweatherapp.presentation.ui.fragments
+package com.example.myweatherapp.presentation.fragmentTwo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myweatherapp.data.image.ImageLoader
-import com.example.myweatherapp.data.network.RetroResponse
+import com.example.myweatherapp.data.models.RetroResponse
 import com.example.myweatherapp.databinding.FragmentTwoBinding
 import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModel
 import com.example.myweatherapp.domain.models.WeatherResponse
-import com.example.myweatherapp.data.services.RetroService
+import com.example.myweatherapp.data.network.RetroService
 import com.example.myweatherapp.domain.WeatherUseCase
 import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModelFactory
-import com.example.myweatherapp.domain.repository.WeatherRepository
+import com.example.myweatherapp.data.repository.WeatherRepository
 import java.util.*
 
 class Fragment2 : Fragment() {

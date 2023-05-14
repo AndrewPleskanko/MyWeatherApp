@@ -1,8 +1,8 @@
 package com.example.myweatherapp.domain
 
-import com.example.myweatherapp.data.network.RetroResponse
+import com.example.myweatherapp.data.models.RetroResponse
 import com.example.myweatherapp.domain.models.WeatherResponse
-import com.example.myweatherapp.domain.repository.WeatherRepository
+import com.example.myweatherapp.data.repository.WeatherRepository
 import java.text.SimpleDateFormat
 import java.util.*
 

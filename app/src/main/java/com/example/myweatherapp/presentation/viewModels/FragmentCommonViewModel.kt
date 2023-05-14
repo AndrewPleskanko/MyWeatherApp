@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myweatherapp.data.network.RetroResponse
+import com.example.myweatherapp.data.models.RetroResponse
 import com.example.myweatherapp.domain.models.WeatherResponse
 import com.example.myweatherapp.domain.WeatherUseCase
 import kotlinx.coroutines.launch
