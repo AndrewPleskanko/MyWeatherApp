@@ -12,12 +12,18 @@ import com.example.myweatherapp.data.RetroResponse
 import com.example.myweatherapp.databinding.FragmentTwoBinding
 import com.example.myweatherapp.viewModels.FragmentCommonViewModel
 import com.example.myweatherapp.data.models.WeatherResponse
+import com.example.myweatherapp.data.services.RetroService
+import com.example.myweatherapp.domain.WeatherUseCase
+import com.example.myweatherapp.viewModels.FragmentCommonViewModelFactory
+import com.example.myweatherapp.viewModels.WeatherRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
 class Fragment2 : Fragment() {
     private lateinit var binding: FragmentTwoBinding
-    private val model: FragmentCommonViewModel by viewModels()
+    private val weatherRepository: WeatherRepository = WeatherRepository(RetroService.retrofitService)
+    private val weatherUseCase: WeatherUseCase = WeatherUseCase(weatherRepository)
+    private val model: FragmentCommonViewModel by viewModels { FragmentCommonViewModelFactory(weatherUseCase) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -5,9 +5,12 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface APIs {
+interface RetrofitService {
 
     @GET("data/2.5/weather?")
-    fun getWeatherData(@Query("q") cityName : String, @Query("APPID") appId : String) : Call<WeatherResponse>
+    suspend fun getWeatherData(
+        @Query("q") cityName: String,
+        @Query("APPID") appId: String
+    ): WeatherResponse
 
 }

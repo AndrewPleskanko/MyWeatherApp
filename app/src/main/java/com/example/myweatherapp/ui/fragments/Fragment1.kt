@@ -9,16 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myweatherapp.R
 import com.example.myweatherapp.data.RetroResponse
 import com.example.myweatherapp.databinding.FragmentOneBinding
 import com.example.myweatherapp.viewModels.FragmentCommonViewModel
 import com.example.myweatherapp.data.models.WeatherResponse
+import com.example.myweatherapp.data.services.RetroService.retrofitService
+import com.example.myweatherapp.domain.WeatherUseCase
+import com.example.myweatherapp.viewModels.FragmentCommonViewModelFactory
+import com.example.myweatherapp.viewModels.WeatherRepository
 
 class Fragment1 : Fragment() {
     private lateinit var binding: FragmentOneBinding
-    private val model: FragmentCommonViewModel by viewModels()
+    private val weatherRepository: WeatherRepository = WeatherRepository(retrofitService)
+    private val weatherUseCase: WeatherUseCase = WeatherUseCase(weatherRepository)
+    private val model: FragmentCommonViewModel by viewModels { FragmentCommonViewModelFactory(weatherUseCase) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
