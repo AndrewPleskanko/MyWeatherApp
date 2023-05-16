@@ -25,7 +25,8 @@ class WeatherUseCase(private val weatherRepository: WeatherRepository) {
     fun convertTimestampToHour(timestamp: Long): String {
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val date = Date(timestamp * 1000)
-        return dateFormat.format(date)
+        val formattedTime = dateFormat.format(date)
+        return "$formattedTime hours"
     }
 
 }

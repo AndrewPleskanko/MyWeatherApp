@@ -90,7 +90,23 @@
             android:orientation="horizontal">
 
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feels Like: "
+                android:textSize="14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"
+                android:textSize="14sp"
+                android:id="@+id/txtFeelsLike"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

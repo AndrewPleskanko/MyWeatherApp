@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myweatherapp.R
+import com.example.myweatherapp.data.image.ImageLoader
 import com.example.myweatherapp.data.models.RetroResponse
 import com.example.myweatherapp.databinding.FragmentOneBinding
 import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModel
@@ -19,13 +20,15 @@ import com.example.myweatherapp.data.network.RetroService.retrofitService
 import com.example.myweatherapp.domain.WeatherUseCase
 import com.example.myweatherapp.presentation.viewModels.FragmentCommonViewModelFactory
 import com.example.myweatherapp.data.repository.WeatherRepository
+import com.example.myweatherapp.domain.ImageUseCase
 
 class Fragment1 : Fragment() {
     private lateinit var binding: FragmentOneBinding
     private val weatherRepository: WeatherRepository = WeatherRepository(retrofitService)
     private val weatherUseCase: WeatherUseCase = WeatherUseCase(weatherRepository)
-
-    private val model: FragmentCommonViewModel by viewModels { FragmentCommonViewModelFactory(weatherUseCase) }
+    private lateinit var imageLoader: ImageLoader
+    private lateinit var imageUseCase: ImageUseCase
+    private val model: FragmentCommonViewModel by viewModels { FragmentCommonViewModelFactory(weatherUseCase, imageUseCase) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,10 +56,16 @@ class Fragment1 : Fragment() {
             findNavController().navigate(R.id.action_fragment1_to_fragment2, bundle)
         }
 
-        observers()
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        imageLoader = ImageLoader(requireContext())
+        imageUseCase = ImageUseCase(imageLoader)
+
+        observers()
+    }
     private fun observers() {
         model.weatherResponse.observe(viewLifecycleOwner) {
             when (it) {
@@ -87,7 +96,14 @@ class Fragment1 : Fragment() {
         binding.txtCity.text = (binding.txtCityName.text.toString() + ", " + (value.sys?.country ?: "N/A"))
         val celsiusTemp = model.formatTemperature(value.main?.temp)
         binding.txtTemp.text = celsiusTemp
+        binding.txtCity.text = (binding.txtCityName.text.toString() + ", " + (value.sys?.country ?: "N/A"))
+
         binding.txtClouds.text = value.clouds?.all?.toString() ?: "N/A"
+        binding.txtClouds.append(" %")
+
         binding.txtPressure.text = value.main?.pressure?.toString() ?: "N/A"
+        binding.txtPressure.append(" hPa")
+
+        binding.txtFeelsLike.text = model.formatTemperature(value.main?.feels_like)
     }
 }

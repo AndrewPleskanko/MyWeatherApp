@@ -3,9 +3,10 @@
     <string name="weather_information">Weather Information</string>
     <string name="details">Details</string>
     <string name="back">Back</string>
-
     <string name="weather_icon">Weather Icon</string>
     <string name="na">N/A</string>
-
+    <string name="clouds_percentage">%1\$s %%</string>
+    <string name="pressure_hpa">%1\$s hPa</string>
+    <string name="humidity_percentage">%1\$s %%</string>
     <string name="weather_icon_url">https://openweathermap.org/img/wn/%1\$s@2x.png</string>
 </resources>

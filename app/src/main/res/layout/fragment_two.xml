@@ -8,24 +8,19 @@
     android:gravity="center"
     tools:context=".presentation.fragmentTwo.Fragment2">
 
+    <TextView
+        android:id="@+id/txtCity"
+        android:layout_width="108dp"
+        android:layout_height="50dp"
+        android:text="N/A"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
     <ImageView
         android:id="@+id/weatherIconImageView"
         android:layout_width="180dp"
         android:layout_height="141dp"
         android:contentDescription="@string/weather_icon" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="257dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="50dp"
-        android:text="All Weather Information"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -60,9 +55,31 @@
         android:layout_marginTop="30dp"
         android:padding="12dp"
         android:orientation="vertical">
+
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feels Like: "
+                android:textSize="14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"
+                android:textSize="14sp"
+                android:id="@+id/txtFeelsLike"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -181,26 +198,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Feels Like: "
-                android:textSize="14sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N/A"
-                android:textSize="14sp"
-                android:id="@+id/txtFeelsLike"/>
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Clouds: "
                 android:textSize="14sp"/>
             <TextView
@@ -234,17 +231,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="City: "
-                android:textSize="14sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N/A"
-                android:textSize="14sp"
-                android:id="@+id/txtCity"/>
+
         </LinearLayout>
 
     </LinearLayout>

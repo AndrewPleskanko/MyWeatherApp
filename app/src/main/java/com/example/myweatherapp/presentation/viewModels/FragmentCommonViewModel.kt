@@ -1,5 +1,6 @@
 package com.example.myweatherapp.presentation.viewModels
 
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,7 @@ import com.example.myweatherapp.domain.models.WeatherResponse
 import com.example.myweatherapp.domain.WeatherUseCase
 import kotlinx.coroutines.launch
 
-class FragmentCommonViewModel(private val weatherUseCase: WeatherUseCase) : ViewModel() {
+class FragmentCommonViewModel(private val weatherUseCase: WeatherUseCase, private val imageLoader: com.example.myweatherapp.domain.ImageUseCase) : ViewModel() {
     private val _weatherResponse: MutableLiveData<RetroResponse<WeatherResponse>> = MutableLiveData()
     val weatherResponse: LiveData<RetroResponse<WeatherResponse>> get() = _weatherResponse
 
@@ -26,7 +27,8 @@ class FragmentCommonViewModel(private val weatherUseCase: WeatherUseCase) : View
     fun convertTimestampToHour(timestamp: Long): String {
         return weatherUseCase.convertTimestampToHour(timestamp)
     }
-    private val _iconUrl = MutableLiveData<String?>()
-    val iconUrl: LiveData<String?> = _iconUrl
+    suspend fun loadImage(url: String, imageView: ImageView) {
+        imageLoader.loadImage(url, imageView)
+    }
 
 }
