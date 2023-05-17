@@ -1,18 +1,21 @@
 package com.example.myweatherapp.domain
 
-import com.example.myweatherapp.data.models.RetroResponse
+import com.example.myweatherapp.data.network.RetroService
 import com.example.myweatherapp.domain.models.WeatherResponse
 import com.example.myweatherapp.data.repository.WeatherRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherUseCase(private val weatherRepository: WeatherRepository) {
-    suspend fun getWeatherData(cityName: String): RetroResponse<WeatherResponse> {
+class WeatherUseCase {
+
+    private val weatherRepository = WeatherRepository(RetroService.retrofitService)
+
+    suspend fun getWeatherData(cityName: String): com.example.myweatherapp.presentation.models.RetroResponse<WeatherResponse> {
         return try {
             val response = weatherRepository.getWeatherData(cityName)
-            RetroResponse.Success(response)
+            com.example.myweatherapp.presentation.models.RetroResponse.Success(response)
         } catch (e: Exception) {
-            RetroResponse.Failure("No information found. Check internet connection", e)
+            com.example.myweatherapp.presentation.models.RetroResponse.Failure("No information found. Check internet connection", e)
         }
     }
 
