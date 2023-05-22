@@ -8,5 +8,8 @@
     <string name="clouds_percentage">%1\$s %%</string>
     <string name="pressure_hpa">%1\$s hPa</string>
     <string name="humidity_percentage">%1\$s %%</string>
+    <string name="Enter_city">Please enter city name</string>
     <string name="weather_icon_url">https://openweathermap.org/img/wn/%1\$s@2x.png</string>
+    <string name="Internet_exception">No information found. Check internet connection</string>
+
 </resources>

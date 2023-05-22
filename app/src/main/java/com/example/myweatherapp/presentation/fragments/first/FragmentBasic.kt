@@ -26,19 +26,23 @@ class FragmentBasic : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOneBinding.inflate(inflater, container, false)
+
+        // обробник подій для отримання даних за назвою міста
         binding.button.setOnClickListener {
             if (binding.txtCityName.text.isNullOrEmpty()) {
-                binding.txtCityName.error = "Please enter city name"
+                binding.txtCityName.error = getString(R.string.Enter_city)
                 return@setOnClickListener
             }
+            //перевірка активності на null
             activity?.currentFocus?.let { view ->
+                //приховуємо клавіатуру після наданого запиту
                 val imm =
                     requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(view.windowToken, 0)
             }
             viewModel.getWeatherData(binding.txtCityName.text.toString())
         }
-
+        // кнопка напігації на наступний фрагмент
         binding.buttonNavFragmentOne.setOnClickListener {
             val cityName = binding.txtCityName.text.toString()
             val bundle = Bundle().apply {
@@ -59,8 +63,7 @@ class FragmentBasic : BaseFragment() {
     override fun bindData(weatherResponse: WeatherResponse) {
         binding.txtCity.text =
             (binding.txtCityName.text.toString() + ", " + (weatherResponse.sys?.country ?: "N/A"))
-        val celsiusTemp = viewModel.formatTemperature(weatherResponse.main?.temp)
-        binding.txtTemp.text = celsiusTemp
+        binding.txtTemp.text = viewModel.formatTemperature(weatherResponse.main?.temp)
         binding.txtCity.text =
             (binding.txtCityName.text.toString() + ", " + (weatherResponse.sys?.country ?: "N/A"))
 

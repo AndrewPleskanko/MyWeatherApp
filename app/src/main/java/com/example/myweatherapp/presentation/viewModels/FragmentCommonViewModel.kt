@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myweatherapp.domain.models.WeatherResponse
 import com.example.myweatherapp.domain.ImageUseCase
 import com.example.myweatherapp.domain.WeatherUseCase
+import com.example.myweatherapp.presentation.models.RetroResponse
 import kotlinx.coroutines.launch
 
 class FragmentCommonViewModel : ViewModel() {
@@ -15,14 +16,17 @@ class FragmentCommonViewModel : ViewModel() {
     private val imageUseCase = ImageUseCase()
     private val weatherUseCase = WeatherUseCase()
 
-    private val _weatherResponse: MutableLiveData<com.example.myweatherapp.presentation.models.RetroResponse<WeatherResponse>> =
+    private val _weatherResponse: MutableLiveData<RetroResponse<WeatherResponse>> =
         MutableLiveData()
-    val weatherResponse: LiveData<com.example.myweatherapp.presentation.models.RetroResponse<WeatherResponse>> get() = _weatherResponse
+    val weatherResponse: LiveData<RetroResponse<WeatherResponse>> get() = _weatherResponse
 
     fun getWeatherData(cityName: String) {
         viewModelScope.launch {
-            _weatherResponse.value = com.example.myweatherapp.presentation.models.RetroResponse.Loading
-            _weatherResponse.value = weatherUseCase.getWeatherData(cityName)
+            //показуємо індикатор завантаження
+            _weatherResponse.postValue(RetroResponse.Loading)
+            //передаємо як змінну до viewModel
+            _weatherResponse.postValue(weatherUseCase.getWeatherData(cityName))
+
         }
     }
 

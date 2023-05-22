@@ -13,7 +13,11 @@ sealed class RetroResponse<out T> {
     open fun getWeatherResponse(): WeatherResponse? = null
 
     data class Success(private val value: WeatherResponse) : RetroResponse<WeatherResponse>() {
-        override fun display(progressBar: ProgressBar, txtError: TextView, layoutInfo: LinearLayout) {
+        override fun display(
+            progressBar: ProgressBar,
+            txtError: TextView,
+            layoutInfo: LinearLayout
+        ) {
             progressBar.visibility = View.GONE
             txtError.visibility = View.GONE
             layoutInfo.visibility = View.VISIBLE
@@ -28,7 +32,11 @@ sealed class RetroResponse<out T> {
         private val message: String,
         private val throwable: Throwable?
     ) : RetroResponse<Nothing>() {
-        override fun display(progressBar: ProgressBar, txtError: TextView, layoutInfo: LinearLayout) {
+        override fun display(
+            progressBar: ProgressBar,
+            txtError: TextView,
+            layoutInfo: LinearLayout
+        ) {
             progressBar.visibility = View.GONE
             txtError.visibility = View.VISIBLE
             txtError.text = message
@@ -37,7 +45,11 @@ sealed class RetroResponse<out T> {
     }
 
     object Loading : RetroResponse<Nothing>() {
-        override fun display(progressBar: ProgressBar, txtError: TextView, layoutInfo: LinearLayout) {
+        override fun display(
+            progressBar: ProgressBar,
+            txtError: TextView,
+            layoutInfo: LinearLayout
+        ) {
             progressBar.visibility = View.VISIBLE
             txtError.visibility = View.GONE
             layoutInfo.visibility = View.GONE

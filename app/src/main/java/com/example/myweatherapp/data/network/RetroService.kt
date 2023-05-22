@@ -9,6 +9,7 @@ private val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
     .baseUrl(BASE_URL)
     .build()
+//отримати доступ до інтерфейсу для виконання HTTP-запитів
 object RetroService {
 
     val retrofitService: RetrofitService by lazy {

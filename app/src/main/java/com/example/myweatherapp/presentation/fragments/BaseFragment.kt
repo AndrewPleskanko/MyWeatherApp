@@ -13,7 +13,11 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract fun bindData(weatherResponse: WeatherResponse)
 
-    protected fun observers(progressBar: ProgressBar, txtError: TextView, layoutInfo: LinearLayout) {
+    protected fun observers(
+        progressBar: ProgressBar,
+        txtError: TextView,
+        layoutInfo: LinearLayout
+    ) {
         viewModel.weatherResponse.observe(viewLifecycleOwner) {
             it.display(progressBar, txtError, layoutInfo)
             it.getWeatherResponse()?.let { response -> bindData(response) }
